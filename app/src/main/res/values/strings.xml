@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Dagger</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="button_1">Button one</string>
+    <string name="button_2">Button Two</string>
+    <string name="button_3">Button Three</string>
+    <string name="show_all">See All Logs</string>
+    <string name="delete_all">Delete all logs</string>
+    <string name="previous">Previous</string>
+    <string name="interaction_placeholder">Interaction with %1$s</string>
+
+    <string name="hello_first_fragment">Log interactions</string>
+</resources>
