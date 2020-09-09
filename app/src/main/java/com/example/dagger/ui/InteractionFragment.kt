@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dagger.R
 import com.example.dagger.data.Log
+import com.example.dagger.data.list.StaticLocalDataSource
 import com.example.dagger.data.room.AppDataBase
 import com.example.dagger.data.room.RoomLocalDataSource
 import kotlinx.android.synthetic.main.fragment_first.*
