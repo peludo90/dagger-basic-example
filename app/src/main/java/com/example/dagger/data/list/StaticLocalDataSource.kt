@@ -18,14 +18,4 @@ object StaticLocalDataSource : LocalDataSource {
     override suspend fun clear() {
         logs.clear()
     }
-
-   /* companion object {
-        @Volatile
-        private var INSTANCE: StaticLocalDataSource? = null
-
-        fun getInstance(): StaticLocalDataSource =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: StaticLocalDataSource()
-            }
-    }*/
 }

@@ -10,14 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dagger.R
 import com.example.dagger.data.Log
-import com.example.dagger.data.list.StaticLocalDataSource
 import com.example.dagger.data.room.AppDataBase
 import com.example.dagger.data.room.RoomLocalDataSource
-import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.android.synthetic.main.fragment_interaction.*
 import kotlinx.coroutines.launch
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * A simple [Fragment] subclass to log interactions
  */
 class InteractionFragment : Fragment() {
 
@@ -32,7 +31,7 @@ class InteractionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        return inflater.inflate(R.layout.fragment_interaction, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
