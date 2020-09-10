@@ -2,8 +2,9 @@ package com.example.dagger.data.list
 
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
+import javax.inject.Inject
 
-object StaticLocalDataSource : LocalDataSource {
+class StaticLocalDataSource @Inject constructor() : LocalDataSource {
 
     private val logs = mutableListOf<Log>()
 

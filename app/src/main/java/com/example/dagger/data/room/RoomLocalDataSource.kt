@@ -2,8 +2,11 @@ package com.example.dagger.data.room
 
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
+import javax.inject.Inject
 
-class RoomLocalDataSource(private val appDataBase: AppDataBase) : LocalDataSource {
+class RoomLocalDataSource @Inject constructor(private val appDataBase: AppDataBase) :
+    LocalDataSource {
+
     override suspend fun save(log: Log) {
         appDataBase.logDao().save(log)
     }
