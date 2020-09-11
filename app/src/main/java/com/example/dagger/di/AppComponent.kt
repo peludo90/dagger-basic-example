@@ -1,22 +1,20 @@
 package com.example.dagger.di
 
-import android.content.Context
-import com.example.dagger.ui.InteractionFragment
-import com.example.dagger.ui.LogsFragment
+import android.app.Application
+import com.example.dagger.LogApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DbModule::class, LocalStorageModule::class])
-interface AppComponent {
+@Component(modules = [AndroidSupportInjectionModule::class, DbModule::class, LocalStorageModule::class, UiBuilderModule::class])
+interface AppComponent : AndroidInjector<LogApplication> {
 
     @Component.Factory
     interface Factory {
         // With @BindsInstance, the Context passed in will be available in the graph
-        fun create(@BindsInstance context: Context): AppComponent
+        fun create(@BindsInstance application: Application): AppComponent
     }
-
-    fun inject(fragment: InteractionFragment)
-    fun inject(fragment: LogsFragment)
 }

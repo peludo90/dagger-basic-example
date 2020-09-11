@@ -13,6 +13,7 @@ import com.example.dagger.R
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.room.AppDataBase
 import com.example.dagger.data.room.RoomLocalDataSource
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_logs.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass to show interaction logs
  */
-class LogsFragment : Fragment() {
+class LogsFragment : DaggerFragment() {
 
     @Inject
     lateinit var dataSource: LocalDataSource
@@ -41,11 +42,6 @@ class LogsFragment : Fragment() {
         logsRv.adapter = logsAdapter
 
         getLogs()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as LogApplication).appComponent.inject(this)
     }
 
     private fun getLogs() {

@@ -1,5 +1,6 @@
 package com.example.dagger.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.dagger.data.room.AppDataBase
@@ -13,9 +14,9 @@ class DbModule {
 
     @Singleton
     @Provides
-    fun providesRoomDataBase(context: Context): AppDataBase =
+    fun providesRoomDataBase(application: Application): AppDataBase =
         Room.databaseBuilder(
-            context,
+            application,
             AppDataBase::class.java,
             DB_NAME
         ).build()

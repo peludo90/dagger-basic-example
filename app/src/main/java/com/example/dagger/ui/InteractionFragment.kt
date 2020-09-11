@@ -13,8 +13,7 @@ import com.example.dagger.LogApplication
 import com.example.dagger.R
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
-import com.example.dagger.data.room.AppDataBase
-import com.example.dagger.data.room.RoomLocalDataSource
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_interaction.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +21,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass to log interactions
  */
-class InteractionFragment : Fragment() {
+class InteractionFragment : DaggerFragment() {
 
     @Inject
     lateinit var dataSource: LocalDataSource
@@ -53,11 +52,6 @@ class InteractionFragment : Fragment() {
         buttonDelete.setOnClickListener {
             clearLogs()
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as LogApplication).appComponent.inject(this)
     }
 
     private fun saveLog(message: String) {

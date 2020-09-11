@@ -1,17 +1,14 @@
 package com.example.dagger
 
-import android.app.Application
-import com.example.dagger.di.AppComponent
 import com.example.dagger.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class LogApplication : Application() {
 
-    val appComponent: AppComponent by lazy {
-        initializeComponent()
-    }
+class LogApplication : DaggerApplication() {
 
-    private fun initializeComponent(): AppComponent {
-        return DaggerAppComponent.factory().create(applicationContext)
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+       return DaggerAppComponent.factory().create(this)
     }
 }
 
