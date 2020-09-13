@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_first_fragment"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintBottom_toTopOf="@id/buttonAll"
+        app:layout_constraintBottom_toTopOf="@id/btnAll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,30 +44,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_3"
-        app:layout_constraintBottom_toTopOf="@id/buttonAll"
+        app:layout_constraintBottom_toTopOf="@id/btnMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnTwo" />
 
-
     <Button
-        android:id="@+id/buttonAll"
+        android:id="@+id/btnMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="@string/show_all"
-        app:layout_constraintBottom_toTopOf="@id/buttonDelete"
+        android:text="@string/button_message"
+        app:layout_constraintBottom_toTopOf="@id/btnAll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnThree" />
 
     <Button
-        android:id="@+id/buttonDelete"
+        android:id="@+id/btnAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="@string/show_all"
+        app:layout_constraintBottom_toTopOf="@id/btnDelete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnMessage" />
+
+    <Button
+        android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_all"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonAll" />
+        app:layout_constraintTop_toBottomOf="@id/btnAll" />
 </androidx.constraintlayout.widget.ConstraintLayout>
