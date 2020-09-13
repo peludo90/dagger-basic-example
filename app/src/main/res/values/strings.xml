@@ -7,10 +7,19 @@
     <string name="button_1">Button one</string>
     <string name="button_2">Button Two</string>
     <string name="button_3">Button Three</string>
+    <string name="button_message">Add message</string>
     <string name="show_all">See All Logs</string>
     <string name="delete_all">Delete all logs</string>
     <string name="previous">Previous</string>
     <string name="interaction_placeholder">Interaction with %1$s</string>
 
     <string name="hello_first_fragment">Log interactions</string>
+
+    <string name="MessageActivity">Message</string>
+    <string name="messageSave">Save</string>
+    <string name="messageHint">Optional text</string>
+    <string name="messageCurrentTime">Time so far: %1$d</string>
+    <string name="messageBuild">Message: %1$s at %2$d seconds</string>
+    <string name="empty">Empty</string>
+    <string name="messageSaved">Message saved</string>
 </resources>

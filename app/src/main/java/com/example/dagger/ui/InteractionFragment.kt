@@ -41,15 +41,16 @@ class InteractionFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.buttonAll).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-
         btnOne.setOnClickListener(clickListener)
         btnTwo.setOnClickListener(clickListener)
         btnThree.setOnClickListener(clickListener)
-
-        buttonDelete.setOnClickListener {
+        btnMessage.setOnClickListener {
+            findNavController().navigate(R.id.toMessage)
+        }
+        btnAll.setOnClickListener {
+            findNavController().navigate(R.id.toLogs)
+        }
+        btnDelete.setOnClickListener {
             clearLogs()
         }
     }
