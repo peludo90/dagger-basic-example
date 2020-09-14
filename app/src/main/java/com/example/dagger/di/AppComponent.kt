@@ -4,12 +4,13 @@ import android.app.Application
 import com.example.dagger.LogApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, DbModule::class, LocalStorageModule::class, UiBuilderModule::class])
+@Component(modules = [AndroidInjectionModule::class, DbModule::class, LocalStorageModule::class, UiBuilderModule::class])
 interface AppComponent : AndroidInjector<LogApplication> {
 
     @Component.Factory

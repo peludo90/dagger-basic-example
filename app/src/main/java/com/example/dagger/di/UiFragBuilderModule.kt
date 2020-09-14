@@ -2,6 +2,7 @@ package com.example.dagger.di
 
 import com.example.dagger.ui.InteractionFragment
 import com.example.dagger.ui.LogsFragment
+import com.example.dagger.ui.MessageFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,4 +14,8 @@ abstract class UiFragBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeLogsFragment(): LogsFragment
+
+    @MessageScope
+    @ContributesAndroidInjector(modules = [TimerModule::class])
+    abstract fun contributeMessageFragment(): MessageFragment
 }
