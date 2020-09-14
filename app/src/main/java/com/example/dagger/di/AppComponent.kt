@@ -17,6 +17,8 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+    fun messageComponent(timerModule: TimerModule): MessageComponent
+
     fun inject(fragment: InteractionFragment)
     fun inject(fragment: LogsFragment)
 }
