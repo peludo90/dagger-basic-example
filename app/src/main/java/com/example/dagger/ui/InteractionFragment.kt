@@ -7,17 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dagger.LogApplication
 import com.example.dagger.R
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
+import com.example.dagger.data.TimeSession
 import com.example.dagger.data.room.AppDataBase
 import com.example.dagger.data.room.RoomLocalDataSource
+import com.example.dagger.di.APP_TIME_SESSION
+import com.example.dagger.di.LOG_ROOM
 import kotlinx.android.synthetic.main.fragment_interaction.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * A simple [Fragment] subclass to log interactions
@@ -25,7 +30,12 @@ import javax.inject.Inject
 class InteractionFragment : Fragment() {
 
     @Inject
+    @Named(LOG_ROOM)
     lateinit var dataSource: LocalDataSource
+
+    @Inject
+    @Named(APP_TIME_SESSION)
+    lateinit var timeSession: TimeSession
 
     private val clickListener = View.OnClickListener { view ->
         saveLog(getString(R.string.interaction_placeholder, (view as Button).text.toString()))
@@ -54,6 +64,9 @@ class InteractionFragment : Fragment() {
         btnDelete.setOnClickListener {
             clearLogs()
         }
+        timeSession.liveDataSecondSinceCreation().observe(viewLifecycleOwner, Observer { seconds ->
+            timeTxt.text = seconds.toString()
+        })
     }
 
     override fun onAttach(context: Context) {

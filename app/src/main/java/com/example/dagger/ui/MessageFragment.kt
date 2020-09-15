@@ -14,16 +14,21 @@ import com.example.dagger.R
 import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
 import com.example.dagger.data.TimeSession
+import com.example.dagger.di.LOG_ROOM
+import com.example.dagger.di.MESSAGE_TIME_SESSION
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 class MessageFragment : Fragment() {
 
     @Inject
+    @Named(LOG_ROOM)
     lateinit var dataSource: LocalDataSource
 
     @Inject
+    @Named(MESSAGE_TIME_SESSION)
     lateinit var timeSession: TimeSession
 
     override fun onCreateView(
