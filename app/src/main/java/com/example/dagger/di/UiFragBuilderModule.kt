@@ -16,6 +16,6 @@ abstract class UiFragBuilderModule {
     abstract fun contributeLogsFragment(): LogsFragment
 
     @MessageScope
-    @ContributesAndroidInjector(modules = [TimerModule::class])
+    @ContributesAndroidInjector(modules = [TimerModule::class, ViewModelModule::class])
     abstract fun contributeMessageFragment(): MessageFragment
 }

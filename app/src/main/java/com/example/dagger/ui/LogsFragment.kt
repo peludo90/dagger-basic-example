@@ -1,18 +1,14 @@
 package com.example.dagger.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dagger.LogApplication
 import com.example.dagger.R
-import com.example.dagger.data.LocalDataSource
-import com.example.dagger.data.room.AppDataBase
-import com.example.dagger.data.room.RoomLocalDataSource
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_logs.*
 import kotlinx.coroutines.launch
@@ -24,7 +20,11 @@ import javax.inject.Inject
 class LogsFragment : DaggerFragment() {
 
     @Inject
-    lateinit var dataSource: LocalDataSource
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)
+            .get(LogsViewModel::class.java)
+    }
 
     private val logsAdapter = LogsAdapter(mutableListOf())
 
@@ -46,7 +46,7 @@ class LogsFragment : DaggerFragment() {
 
     private fun getLogs() {
         viewLifecycleOwner.lifecycleScope.launch {
-            logsAdapter.updateData(dataSource.getAll())
+            logsAdapter.updateData(viewModel.dataSource.getAll())
         }
     }
 }

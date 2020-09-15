@@ -10,12 +10,11 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, DbModule::class, LocalStorageModule::class, UiBuilderModule::class])
+@Component(modules = [AndroidInjectionModule::class, DbModule::class, LocalStorageModule::class, UiBuilderModule::class, ViewModelFactoryModule::class, GlobalViewModelModule::class])
 interface AppComponent : AndroidInjector<LogApplication> {
 
     @Component.Factory
     interface Factory {
-        // With @BindsInstance, the Context passed in will be available in the graph
         fun create(@BindsInstance application: Application): AppComponent
     }
 }

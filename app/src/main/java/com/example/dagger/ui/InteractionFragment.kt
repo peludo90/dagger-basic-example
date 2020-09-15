@@ -1,17 +1,15 @@
 package com.example.dagger.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.dagger.LogApplication
 import com.example.dagger.R
-import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_interaction.*
@@ -24,7 +22,11 @@ import javax.inject.Inject
 class InteractionFragment : DaggerFragment() {
 
     @Inject
-    lateinit var dataSource: LocalDataSource
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)
+            .get(InteractionViewModel::class.java)
+    }
 
     private val clickListener = View.OnClickListener { view ->
         saveLog(getString(R.string.interaction_placeholder, (view as Button).text.toString()))
@@ -57,13 +59,13 @@ class InteractionFragment : DaggerFragment() {
 
     private fun saveLog(message: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            dataSource.save(Log(message))
+            viewModel.dataSource.save(Log(message))
         }
     }
 
     private fun clearLogs() {
         viewLifecycleOwner.lifecycleScope.launch {
-            dataSource.clear()
+            viewModel.dataSource.clear()
         }
     }
 }

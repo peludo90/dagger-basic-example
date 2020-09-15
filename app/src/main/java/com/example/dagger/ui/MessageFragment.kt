@@ -2,21 +2,15 @@ package com.example.dagger.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.dagger.R
-import com.example.dagger.data.LocalDataSource
 import com.example.dagger.data.Log
-import com.example.dagger.data.TimeSession
-import com.example.dagger.data.room.AppDataBase
-import com.example.dagger.data.room.RoomLocalDataSource
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.coroutines.launch
@@ -25,10 +19,11 @@ import javax.inject.Inject
 class MessageFragment : DaggerFragment() {
 
     @Inject
-    lateinit var dataSource: LocalDataSource
-
-    @Inject
-    lateinit var timeSession: TimeSession
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)
+            .get(MessageViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +37,7 @@ class MessageFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         messageCurrentTime.text =
-            getString(R.string.messageCurrentTime, timeSession.timeSinceCreation())
+            getString(R.string.messageCurrentTime, viewModel.timeSession.timeSinceCreation())
 
         messageSave.setOnClickListener {
 
@@ -53,16 +48,17 @@ class MessageFragment : DaggerFragment() {
                 getString(
                     R.string.messageBuild,
                     message,
-                    timeSession.timeSinceCreation()
+                    viewModel.timeSession.timeSinceCreation()
                 )
             )
             messageEdt.setText("")
             Toast.makeText(requireContext(), R.string.messageSaved, Toast.LENGTH_SHORT).show()
         }
-        timeSession.liveDataSecondSinceCreation().observe(viewLifecycleOwner, Observer { seconds ->
-            messageCurrentTime.text =
-                getString(R.string.messageCurrentTime, seconds)
-        })
+        viewModel.timeSession.liveDataSecondSinceCreation()
+            .observe(viewLifecycleOwner, Observer { seconds ->
+                messageCurrentTime.text =
+                    getString(R.string.messageCurrentTime, seconds)
+            })
     }
 
     override fun onAttach(context: Context) {
@@ -72,7 +68,7 @@ class MessageFragment : DaggerFragment() {
 
     private fun saveLog(message: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            dataSource.save(Log(message))
+            viewModel.dataSource.save(Log(message))
         }
     }
 }
