@@ -21,9 +21,4 @@ class DbModule {
             AppDataBase::class.java,
             DB_NAME
         ).build()
-
-    @Singleton
-    @Provides
-    @Named(APP_TIME_SESSION)
-    fun providesTimerSession() = TimeSession()
 }

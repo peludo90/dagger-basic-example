@@ -74,6 +74,11 @@ class InteractionFragment : Fragment() {
         (requireActivity().application as LogApplication).appComponent.inject(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity().application as LogApplication).releaseMessageComponent()
+    }
+
     private fun saveLog(message: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             dataSource.save(Log(message))
